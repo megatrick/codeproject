@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MikeSpark - Graphic Design Portfolio</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #440000;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .portfolio-item, .about, .process {
+            background-color: #fff;
+            margin: 1rem 0;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .portfolio-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .portfolio-item h2, .about h2, .process h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MikeSpark</h1>
+        <p>Welcome to my website</p>
+    </header>
+    <div class="container">
+        <section class="about">
+            <h2>About Me</h2>
+            <p>Hi, I'm Mike, a passionate graphic designer with over 10 years of experience in creating stunning visuals for various clients. My expertise lies in branding, illustration, and digital design. I love turning ideas into beautiful and functional designs.</p>
+        </section>
+        <section class="process">
+            <h2>My Process</h2>
+            <p>My design process is collaborative and client-focused. It involves understanding the client's vision, brainstorming ideas, creating initial drafts, and refining the designs based on feedback. I ensure that the final product not only meets but exceeds client expectations.</p>
+        </section>
+        <section class="portfolio-item">
+            <h2>Branding Design</h2>
+            <img src="path/to/image1.jpg" alt="Project 1">
+            <p>Description of the project goes here.</p>
+        </section>
+        <section class="portfolio-item">
+            <h2>Web Design</h2>
+            <img src="path/to/image2.jpg" alt="Project 2">
+            <p>Description of the project goes here.</p>
+        </section>
+        <section class="portfolio-item">
+            <h2>Logo Design</h2>
+            <img src="path/to/image3.jpg" alt="Project 2">
+            <p>Description of the project goes here.</p>
+        </section>
+        <!-- Add more portfolio items as needed -->
+    </div>
+    <style>
+      /* Make the container full width */
+      .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+<div>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.2/lib/p5.min.js"></script>
+    <script>
+    let nodes = [];
+    let totalNodes = 40;
+    let maxLinkDist = 120;
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      for (let i = 0; i < totalNodes; i++) {
+        nodes.push({
+          x: random(width),
+          y: random(height),
+          vx: random(-1, 1),
+          vy: random(-1, 1)
+        });
+      }
+    }
+
+    function draw() {
+      background(20);
+      for (let i = 0; i < totalNodes; i++) {
+        let n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > width) n.vx *= -1;
+        if (n.y < 0 || n.y > height) n.vy *= -1;
+
+        fill(255);
+        noStroke();
+        ellipse(n.x, n.y, 5, 5);
+      }
+
+      stroke(255, 100);
+      for (let i = 0; i < totalNodes; i++) {
+        for (let j = i + 1; j < totalNodes; j++) {
+          let distNodes = dist(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+          if (distNodes < maxLinkDist) {
+            line(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
+          }
+        }
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+    </script>
+
+  </div>
+
+  <div>
+
+    <script>
+    let dotCount = 50;
+    let dots = [];
+
+    function setup() {
+      createCanvas(windowWidth, 300);
+      for (let i = 0; i < dotCount; i++) {
+        dots.push({ x: random(width), y: random(height) });
+      }
+    }
+
+    function draw() {
+      background(50);
+      noStroke();
+      fill(255);
+      for (let d of dots) {
+        ellipse(d.x, d.y, 8, 8);
+      }
+    }
+
+    function mouseMoved() {
+      for (let d of dots) {
+        let distance = dist(mouseX, mouseY, d.x, d.y);
+        if (distance < 100) {
+          let angle = atan2(d.y - mouseY, d.x - mouseX);
+          let push = 3;
+          d.x += push * cos(angle);
+          d.y += push * sin(angle);
+        }
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, 300);
+    }
+    </script>
+  
+</div>
+</body>
+</html>
